@@ -10,7 +10,9 @@ Dotenv.load
 # ENV.fetch('MY_ENV_VARIABLE', 'default if variable not found')
 $browser_type = ENV.fetch('BROWSER','chrome')
 $platform = ENV.fetch('PLATFORM','desktop')
-$app_path = ENV.fetch('APP_PATH')
+#$app_path = ENV.fetch('APP_PATH')
+$app_path = "https://www.amazon.com"
+
 $is_headless = ENV.fetch('HEADLESS','no')
 
 # check for valid parameters
