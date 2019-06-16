@@ -4,7 +4,6 @@ require 'selenium-cucumber'
 require 'selenium-webdriver'
 require 'rspec'
 
-
 Given 'I search {string}' do |value|
   wait_for_element_to_display(:id, 'twotabsearchtextbox', 10)
   wait_for_element_to_display(:xpath, '//input[@value="Go"]', 10)
@@ -13,22 +12,17 @@ Given 'I search {string}' do |value|
   sleep 2
 end
 
-And 'Filter for {string}' do |filter|
-  wait_for_element_to_display(:xpath, '//span[@class="a-size-base a-color-base"][contains(.,"Polycarbonate")]', 10)
-  click(:xpath, '//span[@class="a-size-base a-color-base"][contains(.,"'+filter+'")]')
+And 'Filter for Polycarbonate' do
+  wait_for_element_to_display(:xpath, '(//span[contains(.,"Polycarbonate")])[3]', 10)
+  click(:xpath, '(//span[contains(.,"Polycarbonate")])[3]')
 end
 
 And 'Order by price {string}' do |item_drop|
   wait_for_element_to_display(:id, 's-result-sort-select', 10)
   select_option_from_dropdown(:id, :text, item_drop, 's-result-sort-select')
-  
 end
 
-Then 'Check that items are ordered by price' do 
+Then 'Check that items are ordered by price' do
   wait_for_element_to_display(:xpath, '//span[@class="a-color-base"][contains(.,"$")]', 10)
- # puts 'Resultado value '+  get_element_attribute(:name, 'ref', 'value')
-  get_element_attribute(:name, 'ref', 'value').should eql? ("sr_st_price-desc-rank")
-
+  get_element_attribute(:name, 'ref', 'value').should eql? 'sr_st_price-desc-rank'
 end
-
-

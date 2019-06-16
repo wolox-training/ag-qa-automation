@@ -1,7 +1,7 @@
 GlobalVars:
   AllowedVariables:
     - $driver
-
+    - $app_path
 Metrics/LineLength:
   Max: 100
 

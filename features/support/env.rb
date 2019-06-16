@@ -43,12 +43,17 @@ if $platform == 'android' || $platform == 'iOS'
 else # else create driver instance for desktop browser
   begin
     chromedriver_path = File.join(File.absolute_path(''),"chromedriver")
-    Selenium::WebDriver::Chrome.driver_path = chromedriver_path
+    Selenium::WebDriver::Service.driver_path = chromedriver_path
     if $is_headless == 'yes'
       $headless = Headless.new
       $headless.start
     end
-    $driver = Selenium::WebDriver.for(:chrome, args:['--incognito','--disable-popup-blocking','binary_location=/var/task/bin/headless-chromium'],prefs: { "disable-popup-blocking":"true"})
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--ignore-certificate-errors')
+    options.add_argument("--window-size=1720,1080");
+    options.add_argument("--disable-popup-blocking");
+    options.add_argument("--disable-notifications");
+    $driver = Selenium::WebDriver.for(:chrome, options: options)
     $driver.manage.window.maximize
   rescue Exception => e
     puts e.message

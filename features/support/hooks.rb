@@ -9,4 +9,3 @@ After do
   $driver.local_storage.clear
   sleep 1
 end
-
