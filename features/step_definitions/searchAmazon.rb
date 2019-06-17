@@ -12,9 +12,9 @@ Given 'I search {string}' do |value|
   sleep 2
 end
 
-And 'Filter for Polycarbonate' do
-  wait_for_element_to_display(:xpath, '(//span[contains(.,"Polycarbonate")])[3]', 10)
-  click(:xpath, '(//span[contains(.,"Polycarbonate")])[3]')
+And 'Filter for {string}' do |filter|
+  wait_for_element_to_display(:xpath, "(//span[contains(.,'#{filter}')])[3]", 10)
+  click(:xpath, "(//span[contains(.,'#{filter}')])[3]")
 end
 
 And 'Order by price {string}' do |item_drop|
