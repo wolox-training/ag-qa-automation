@@ -22,6 +22,6 @@ And 'Order by price {string}' do |item_drop|
 end
 
 Then 'Check that items are ordered by price' do
-  elem = $driver.find_elements(:xpath, "//span[@class='a-color-base'][contains(.,'$')]")
+  elem = $driver.find_elements(:xpath, "//span[@class='a-color-base'][contains(.,'$')]").map { |e| }
   elem.should eql? elem.sort.reverse
 end
