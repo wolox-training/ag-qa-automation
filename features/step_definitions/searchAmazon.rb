@@ -4,12 +4,11 @@ require 'selenium-cucumber'
 require 'selenium-webdriver'
 require 'rspec'
 
-Given 'I search {string}' do |value|
-  wait_for_element_to_display(:id, 'twotabsearchtextbox', 10)
+When 'A user that search {string}' do |value|
+  wait_for_element_to_enable(:id, 'twotabsearchtextbox', 10)
   wait_for_element_to_display(:xpath, '//input[@value="Go"]', 10)
   enter_text(:id, value, 'twotabsearchtextbox')
-  click(:xpath, '//input[@value="Go"]')
-  sleep 2
+  submit(:xpath, '//input[@value="Go"]')
 end
 
 And 'Filter for {string}' do |filter|
@@ -23,6 +22,6 @@ And 'Order by price {string}' do |item_drop|
 end
 
 Then 'Check that items are ordered by price' do
-  wait_for_element_to_display(:xpath, '//span[@class="a-color-base"][contains(.,"$")]', 10)
-  get_element_attribute(:name, 'ref', 'value').should eql? 'sr_st_price-desc-rank'
+  elem = $driver.find_elements(:xpath, "//span[@class='a-color-base'][contains(.,'$')]").map { |e| }
+  elem.should eql? array.sort.reverse
 end
