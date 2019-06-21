@@ -23,5 +23,5 @@ end
 
 Then 'Check that items are ordered by price' do
   elem = $driver.find_elements(:xpath, "//span[@class='a-color-base'][contains(.,'$')]").map { |e| }
-  elem.should eql? array.sort.reverse
+  elem.should eql? elem.sort.reverse
 end
